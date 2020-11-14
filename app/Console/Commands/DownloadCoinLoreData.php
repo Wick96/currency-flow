@@ -44,7 +44,6 @@ class DownloadCoinLoreData extends Command
         $globalData = $this->client->getGlobalData();
 
         if (!empty($globalData[0])) {
-
             $validator = Validator::make($globalData[0], [
                 'coins_count'    => 'required',
                 'active_markets' => 'required',
@@ -65,7 +64,6 @@ class DownloadCoinLoreData extends Command
             $globalDataEntry->fill($validatedData);
 
             $globalDataEntry->save();
-
         } else {
             Log::warning('coinlore_download_command: Cannot create new GlobalData entry! Missing data!');
         }
@@ -76,7 +74,6 @@ class DownloadCoinLoreData extends Command
         $coinData = $this->client->getCoinData($coinId);
 
         if (!empty($coinData[0])) {
-
             $validator = Validator::make($coinData[0], [
                 'symbol'    => 'required',
                 'name'      => 'required',
@@ -96,7 +93,6 @@ class DownloadCoinLoreData extends Command
             $coinDataEntry->fill($validatedData);
 
             $coinDataEntry->save();
-
         } else {
             Log::warning('coinlore_download_command: Cannot create new CoinData entry! Missing data!');
         }
