@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Page;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
@@ -23,7 +24,7 @@ class ApiTokenController extends Controller
             'api_token_preview' => substr($rawToken, 0, 20),
         ])->save();
 
-        Log::info('api_token: User generate new API token!',  ['user_id' => Auth::user()->id]);
+        Log::info('api_token: User generate new API token!', ['user_id' => Auth::user()->id]);
 
         $request->session()->flash('raw.api.token', $rawToken);
 
