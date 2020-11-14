@@ -16,3 +16,5 @@ use Illuminate\Support\Facades\Route;
 Auth::routes(['reset' => false]);
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/api-token/generate', [App\Http\Controllers\ApiTokenController::class, 'generate'])->name('token-generate');
+
