@@ -1,64 +1,50 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\Controller;
 use App\Models\CoinData;
 use Illuminate\Http\Request;
 
 class CoinDataController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'coin_symbol' => 'string',
+            'from_date' => 'date',
+        ]);
+
+        $coins = CoinData::select();
+
+        if (isset($validated['from_date'])) {
+            $coins->where('created_at', '>=', $validated['from_date']);
+        }
+
+        if (isset($validated['coin_symbol'])) {
+            $coins->where('symbol', '=', strtoupper($validated['coin_symbol']));
+        }
+
+        return $coins->paginate();
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function show(CoinData $coinData)
     {
-        //
+        return $coinData;
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\CoinData  $bitcoinData
-     * @return \Illuminate\Http\Response
-     */
-    public function show(CoinData $bitcoinData)
+    public function latest(Request $request)
     {
-        //
-    }
+        $validated = $request->validate([
+            'coin_symbol' => 'string',
+        ]);
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\CoinData  $bitcoinData
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, CoinData $bitcoinData)
-    {
-        //
-    }
+        $coins = CoinData::select();
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\CoinData  $bitcoinData
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(CoinData $bitcoinData)
-    {
-        //
+        if (isset($validated['coin_symbol'])) {
+            $coins->where('symbol', '=', strtoupper($validated['coin_symbol']));
+        }
+
+        return $coins->latest()->first();
     }
 }

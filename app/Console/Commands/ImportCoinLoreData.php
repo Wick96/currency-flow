@@ -10,10 +10,10 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
 
-class DownloadCoinLoreData extends Command
+class ImportCoinLoreData extends Command
 {
     /** @var string */
-    protected $signature = 'command:download:coinlore:data';
+    protected $signature = 'command:import:coinlore:data';
 
     /** @var string */
     protected $description = 'This command fetch coinlore API and save data to our database!';
@@ -36,6 +36,7 @@ class DownloadCoinLoreData extends Command
         $this->downloadCoinData(CoinLoreClient::XRP_COIN_LORE_ID);
         $this->downloadCoinData(CoinLoreClient::USDT_COIN_LORE_ID);
 
+        $this->info('Import completed!');
         return 0;
     }
 

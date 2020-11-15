@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Api\CoinDataController;
+use App\Http\Controllers\Api\GlobalDataController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -17,3 +19,11 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::middleware('auth:api')->get('/global-data', [GlobalDataController::class, 'index']);
+Route::middleware('auth:api')->get('/global-data/latest', [GlobalDataController::class, 'latest']);
+Route::middleware('auth:api')->get('/global-data/{globalData}', [GlobalDataController::class, 'show']);
+
+Route::middleware('auth:api')->get('/coins-data', [CoinDataController::class, 'index']);
+Route::middleware('auth:api')->get('/coins-data/latest', [CoinDataController::class, 'latest']);
+Route::middleware('auth:api')->get('/coins-data/{coinData}', [CoinDataController::class, 'show']);
