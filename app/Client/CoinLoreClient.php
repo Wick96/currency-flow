@@ -17,27 +17,27 @@ class CoinLoreClient
     const XRP_COIN_LORE_ID = 58;
     const USDT_COIN_LORE_ID = 518;
 
-    public function getGlobalData(): ?array
+    public function getGlobalData(): array
     {
         try {
             $response = $this->get('global');
         } catch (RequestException $e) {
             Log::error('coinlore_client: Can not get data from [/global] endpoint.', $e->getMessage());
 
-            return null;
+            return [];
         }
 
         return $response->json();
     }
 
-    public function getCoinData(int $coinId): ?array
+    public function getCoinData(int $coinId): array
     {
         try {
             $response = $this->get('ticker', ['id' => $coinId]);
         } catch (RequestException $e) {
             Log::error('coinlore_client: Can not get data from [/ticker] endpoint, for coin with id [' . $coinId . '].', $e->getMessage());
 
-            return null;
+            return [];
         }
 
         return $response->json();
