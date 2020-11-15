@@ -12,10 +12,15 @@ class CoinLoreClient
 {
     const COIN_LORE_API_URL = 'https://api.coinlore.net/api/';
 
-    const BTC_COIN_LORE_ID = 90;
-    const ETH_COIN_LORE_ID = 80;
-    const XRP_COIN_LORE_ID = 58;
-    const USDT_COIN_LORE_ID = 518;
+    public const BTC_COIN_LORE_ID = 90;
+    public const ETH_COIN_LORE_ID = 80;
+    public const XRP_COIN_LORE_ID = 58;
+    public const USDT_COIN_LORE_ID = 518;
+
+    public const BTC_COIN_LORE_SYMBOL = 'BTC';
+    public const ETH_COIN_LORE_SYMBOL = 'ETH';
+    public const XRP_COIN_LORE_SYMBOL = 'XRP';
+    public const USDT_COIN_LORE_SYMBOL = 'USDT';
 
     public function getGlobalData(): array
     {
