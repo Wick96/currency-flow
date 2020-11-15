@@ -1,64 +1,24 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\Controller;
 use App\Models\GlobalData;
-use Illuminate\Http\Request;
 
 class GlobalDataController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        //
+        return GlobalData::paginate();
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\GlobalData  $globalData
-     * @return \Illuminate\Http\Response
-     */
     public function show(GlobalData $globalData)
     {
-        //
+        return $globalData;
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\GlobalData  $globalData
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, GlobalData $globalData)
+    public function latest()
     {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\GlobalData  $globalData
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(GlobalData $globalData)
-    {
-        //
+        return GlobalData::latest()->first();
     }
 }
